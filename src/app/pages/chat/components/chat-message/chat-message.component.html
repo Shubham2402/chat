@@ -1,5 +1,7 @@
 <div class="chat-message d-flex">
-    <img [src]="message.sender.photoUrl" style="width:100px;height:100px;" class="rounded-circle">
+    <div class="image-wrapper">
+        <img [src]="message.sender.photoUrl" style="width:50px;height:50px;" class="rounded-circle">
+    </div>
     <div class="bubble d-flex flex-coloumn">
         <div class="name">
             {{message.sender.firstName}} {{message.sender.lastName}}

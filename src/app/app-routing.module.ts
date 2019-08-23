@@ -4,6 +4,7 @@ import { from } from 'rxjs';
 import {LoginComponent} from './pages/login/login.component'
 import {SignupComponent} from './pages/signup/signup.component'
 import { ChatComponent } from './pages/chat/chat.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
   },
   {
     path:'chat',
-    component:ChatComponent
+    component:ChatComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:'**',

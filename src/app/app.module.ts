@@ -1,11 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/login/login.component';
+import { environment } from '../environments/environment';
 import {ReactiveFormsModule} from '@angular/forms'
 import {FormsModule} from '@angular/forms';
+//Modules
+import { AlertModule } from 'ngx-bootstrap';
+import { NgxLoadingModule } from 'ngx-loading';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+//Guards
+import {AuthGuard} from './guards/auth.guard'
+
+//services
+import { AlertService } from './services/alert.service';
+import { LoadingService } from './services/loading.service';
+import { AuthService } from './services/auth.service';
+
+//components
+import { AppComponent } from './app.component';
+import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -14,6 +30,8 @@ import { ChatroomListComponent } from './pages/chat/components/chatroom-list/cha
 import { ChatroomTitleBarComponent } from './pages/chat/components/chatroom-title-bar/chatroom-title-bar.component';
 import { ChatroomWindowComponent } from './pages/chat/components/chatroom-window/chatroom-window.component';
 import { ChatMessageComponent } from './pages/chat/components/chat-message/chat-message.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,11 +48,21 @@ import { ChatMessageComponent } from './pages/chat/components/chat-message/chat-
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BsDropdownModule.forRoot(),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxLoadingModule.forRoot({}),
+    AlertModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [
+    AlertService,
+    LoadingService,
+    AuthService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
