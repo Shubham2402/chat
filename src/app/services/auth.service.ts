@@ -38,19 +38,26 @@ export class AuthService {
           id:user.user.uid,
           email: user.user.email,
           firstName,
-          lastName
+          lastName,
+          photoUrl:'https://firebasestorage.googleapis.com/v0/b/chat-8dbf0.appspot.com/o/download400*400.jpeg?alt=media&token=5c099ca7-6079-46fa-8ac4-0ecc75f31ec9'
         }
+        userRef.set(updatedUser);
         return true;
       })
+      .catch((err)=>false)
     );
   }
   public login(email: string,password:string):Observable<boolean>{
-    //TODO call firebase login function
-    return of(true)
+    return from(
+      this.afAuth.auth.signInWithEmailAndPassword(email,password)
+      .then((user)=> true)
+      .catch((err)=> false)
+    )
   }
   public logout():void{
-    //TODO call firebase logout function
-    this.router.navigate(['/login'])
-    this.alertService.alerts.next(new Alert('You have been logout.'))
+    this.afAuth.auth.signOut().then(()=>{
+      this.router.navigate(['/login'])
+      this.alertService.alerts.next(new Alert('You have been logout.'))  
+    })
   }
 }

@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 import {ReactiveFormsModule} from '@angular/forms'
 import {FormsModule} from '@angular/forms';
+
 //Modules
 import { AlertModule } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
@@ -11,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 //Guards
 import {AuthGuard} from './guards/auth.guard'
 
@@ -18,6 +20,7 @@ import {AuthGuard} from './guards/auth.guard'
 import { AlertService } from './services/alert.service';
 import { LoadingService } from './services/loading.service';
 import { AuthService } from './services/auth.service';
+import { ChatroomService } from './services/chatroom.service';
 
 //components
 import { AppComponent } from './app.component';
@@ -30,7 +33,6 @@ import { ChatroomListComponent } from './pages/chat/components/chatroom-list/cha
 import { ChatroomTitleBarComponent } from './pages/chat/components/chatroom-title-bar/chatroom-title-bar.component';
 import { ChatroomWindowComponent } from './pages/chat/components/chatroom-window/chatroom-window.component';
 import { ChatMessageComponent } from './pages/chat/components/chat-message/chat-message.component';
-
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { ChatMessageComponent } from './pages/chat/components/chat-message/chat-
     AlertService,
     LoadingService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    ChatroomService
   ],
   bootstrap: [AppComponent]
 })
