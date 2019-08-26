@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatroomService } from 'src/app/services/chatroom.service';
 
 @Component({
   selector: 'app-chat-input',
@@ -8,14 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class ChatInputComponent implements OnInit {
   public newMessageText :string='';
 
-  constructor() { }
+  constructor(
+    private chatroomService: ChatroomService
+  ) { }
 
   ngOnInit() {
   }
   public submit(message:string):void{
-    //TODO save text to firebase backend
-    console.log('New Message:',message)
-
+    this.chatroomService.createMessage(message)
+  
     //reset input
     this.newMessageText='';
   }

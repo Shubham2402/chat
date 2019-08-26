@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AlertType} from './../enums/alert-type.enum';
-import {User } from '../classes/user';
+import {User } from '../interfaces/user';
 import {Router} from '@angular/router';
 import {Observable, from} from 'rxjs';
 import {AlertService} from './../services/alert.service';
@@ -14,6 +14,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 })
 export class AuthService {
   public currentUser : Observable<User | null>;
+  public currentUserSnapshot : User | null;
   constructor(
     private router: Router,
     private alertService: AlertService,
@@ -28,6 +29,7 @@ export class AuthService {
         return of(null);
       }
     }))
+    this.setCurrentUserSnapshot();
   }
   public signup(firstName: string,lastName: string,email: string,password: string):Observable<boolean>{
     return from(
@@ -39,7 +41,9 @@ export class AuthService {
           email: user.user.email,
           firstName,
           lastName,
-          photoUrl:'https://firebasestorage.googleapis.com/v0/b/chat-8dbf0.appspot.com/o/download400*400.jpeg?alt=media&token=5c099ca7-6079-46fa-8ac4-0ecc75f31ec9'
+          photoUrl:'https://firebasestorage.googleapis.com/v0/b/chat-8dbf0.appspot.com/o/download400*400.jpeg?alt=media&token=5c099ca7-6079-46fa-8ac4-0ecc75f31ec9',
+          quote:'Life is like a box',
+          bio: 'Bio is under construction...'
         }
         userRef.set(updatedUser);
         return true;
@@ -59,5 +63,9 @@ export class AuthService {
       this.router.navigate(['/login'])
       this.alertService.alerts.next(new Alert('You have been logout.'))  
     })
+  }
+
+  private setCurrentUserSnapshot(): void {
+    this.currentUser.subscribe(user => this.currentUserSnapshot =user);
   }
 }

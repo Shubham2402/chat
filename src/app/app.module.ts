@@ -33,6 +33,7 @@ import { ChatroomListComponent } from './pages/chat/components/chatroom-list/cha
 import { ChatroomTitleBarComponent } from './pages/chat/components/chatroom-title-bar/chatroom-title-bar.component';
 import { ChatroomWindowComponent } from './pages/chat/components/chatroom-window/chatroom-window.component';
 import { ChatMessageComponent } from './pages/chat/components/chat-message/chat-message.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ChatMessageComponent } from './pages/chat/components/chat-message/chat-
     ChatroomTitleBarComponent,
     ChatroomWindowComponent,
     ChatMessageComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
